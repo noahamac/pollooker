@@ -163,7 +163,8 @@ view: primary {
 
   dimension: sample_size_bucket {
     type: tier
-    tiers: [0, 200, 400, 800, 1000, 5000]
+    tiers: [200, 400, 800, 1000]
+    style: integer
     sql: ${sample_size} ;;
   }
 
