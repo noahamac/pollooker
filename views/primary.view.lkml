@@ -53,8 +53,27 @@ view: primary {
 
   dimension: fte_grade {
     label: "Pollster Grade"
+    description: "Grade assigned by 538's 2020 Pollster review"
     type: string
     sql: ${TABLE}.fte_grade ;;
+  }
+
+  dimension: grade_bucket {
+    sql: CASE
+        WHEN ${fte_grade} = "A" THEN 'A'
+        WHEN ${fte_grade} = "A-" THEN 'A'
+        WHEN ${fte_grade} = "A+" THEN 'A'
+        WHEN ${fte_grade} = "B" THEN 'B'
+        WHEN ${fte_grade} = "B-" THEN 'B'
+        WHEN ${fte_grade} = "B+" THEN 'B'
+        WHEN ${fte_grade} = "C" THEN 'C'
+        WHEN ${fte_grade} = "C-" THEN 'C'
+        WHEN ${fte_grade} = "C+" THEN 'C'
+        WHEN ${fte_grade} = "D" THEN 'D'
+        WHEN ${fte_grade} = "D-" THEN 'D'
+        WHEN ${fte_grade} = "D+" THEN 'D'
+        ELSE ${fte_grade}
+        END ;;
   }
 
   dimension: internal {
