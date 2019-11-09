@@ -161,6 +161,12 @@ view: primary {
     sql: ${TABLE}.sample_size ;;
   }
 
+  dimension: sample_size_bucket {
+    type: tier
+    tiers: [0, 200, 400, 800, 1000, 5000]
+    sql: ${sample_size} ;;
+  }
+
   dimension: sponsor_candidate {
     type: string
     sql: ${TABLE}.sponsor_candidate ;;
