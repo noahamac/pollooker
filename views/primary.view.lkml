@@ -230,6 +230,11 @@ view: primary {
     drill_fields: [candidate_name, pollster_rating_name, display_name]
   }
 
+  measure: total_sample {
+    type: sum
+    sql: ${sample_size} ;;
+  }
+
   measure: polling_pct {
     type: number
     sql: ${pct} ;;
