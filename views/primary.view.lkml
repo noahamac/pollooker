@@ -236,8 +236,58 @@ view: primary {
   }
 
   measure: polling_pct {
-    type: number
+    type: average
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+  }
+  measure: ntl_polling_pct {
+    label: "National Polling Average"
+    type: average
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: ""
+    }
+  }
+  measure: ia_polling_pct {
+    label: "Iowa Polling Average"
+    type: average
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Iowa"
+    }
+  }
+  measure: nh_polling_pct {
+    label: "New Hampshire Polling Average"
+    type: average
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "New Hampshire"
+    }
+  }
+  measure: ca_polling_pct {
+    label: "California Polling Average"
+    type: average
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "California"
+    }
+  }
+  measure: sc_polling_pct {
+    label: "South Carolina Polling Average"
+    type: average
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "South Carolina"
+    }
   }
 }
