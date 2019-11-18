@@ -2,6 +2,7 @@ connection: "datapoint"
 
 # include all the views
 include: "/views/**/*.view"
+include: "/*.dashboard"
 
 datagroup: pollooker_default_datagroup {
   # sql_trigger: SELECT MAX(id) FRO M etl_log;;
