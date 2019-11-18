@@ -244,10 +244,10 @@ view: primary {
     label: "National Polling Average"
     type: average
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
-      value: ""
+      value: EMPTY
     }
   }
   measure: ia_polling_pct {
