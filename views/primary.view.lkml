@@ -102,7 +102,7 @@ view: primary {
   dimension: mugshot {
     type: string
     sql: ${mugshot_link};;
-    html: <img src="{{value}}" /> ;;
+    html: <img src="{{value}}" width="200px"/> ;;
   }
 
   dimension: internal {
