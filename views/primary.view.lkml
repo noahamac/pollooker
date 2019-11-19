@@ -172,7 +172,7 @@ view: primary {
   }
 
   dimension: pool {
-    type: number
+    type: string
     sql: CONCAT(CAST(${sample_size} as CHAR),${population_full}) ;;
   }
 
