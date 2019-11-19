@@ -171,6 +171,12 @@ view: primary {
     sql: ${TABLE}.sample_size ;;
   }
 
+  dimension: pool {
+    type: number
+    sql: ${sample_size} + ${population_full} ;;
+  }
+
+
   dimension: sample_size_bucket {
     type: tier
     tiers: [200, 400, 800, 1000]
