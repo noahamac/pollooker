@@ -3,12 +3,14 @@ view: primary {
 
   dimension: campaign {
     type: string
+    description: "Last names: Biden, Warren, Sanders, Buttigieg, Harris, Yang, Klobuchar, etc"
     sql: ${TABLE}.answer ;;
   }
 
   dimension: candidate_name {
     type: string
     sql: ${TABLE}.candidate_name ;;
+    hidden: yes
   }
 
   dimension_group: created_at {
@@ -29,11 +31,13 @@ view: primary {
   dimension: cycle {
     type: number
     sql: ${TABLE}.cycle ;;
+    hidden: yes
   }
 
   dimension: display_name {
     type: string
     sql: ${TABLE}.display_name ;;
+    hidden: yes
   }
 
   dimension_group: end_date {
@@ -79,6 +83,7 @@ view: primary {
   dimension: internal {
     type: string
     sql: ${TABLE}.internal ;;
+    hidden: yes
   }
 
   dimension: methodology {
@@ -99,11 +104,13 @@ view: primary {
   dimension: office_type {
     type: string
     sql: ${TABLE}.office_type ;;
+    hidden: yes
   }
 
   dimension: partisan {
     type: string
     sql: ${TABLE}.partisan ;;
+    hidden: yes
   }
 
   dimension: party {
@@ -134,11 +141,13 @@ view: primary {
   dimension: pollster_rating_id {
     type: number
     sql: ${TABLE}.pollster_rating_id ;;
+    hidden: yes
   }
 
   dimension: pollster_rating_name {
     type: string
     sql: ${TABLE}.pollster_rating_name ;;
+    hidden: yes
   }
 
   dimension: population {
@@ -154,6 +163,7 @@ view: primary {
   dimension: question_id {
     type: number
     sql: ${TABLE}.question_id ;;
+    hidden: yes
   }
 
   dimension: sample_size {
@@ -171,11 +181,13 @@ view: primary {
   dimension: sponsor_candidate {
     type: string
     sql: ${TABLE}.sponsor_candidate ;;
+    hidden: yes
   }
 
   dimension: sponsor_ids {
     type: string
     sql: ${TABLE}.sponsor_ids ;;
+    hidden: yes
   }
 
   dimension: sponsors {
@@ -212,6 +224,7 @@ view: primary {
   dimension: tracking {
     type: string
     sql: ${TABLE}.tracking ;;
+    hidden: yes
   }
 
   dimension: url {
