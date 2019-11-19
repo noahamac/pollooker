@@ -172,8 +172,9 @@ view: primary {
   }
 
   dimension: pool {
+    label: "Sample & Population"
     type: string
-    sql: CONCAT(CAST(${sample_size} as CHAR),${population_full}) ;;
+    sql: CONCAT(CAST(${sample_size} as CHAR), " ", ${population_full}) ;;
   }
 
 
