@@ -83,19 +83,18 @@ view: primary {
   dimension: mugshot_link {
     type: string
     sql: CASE
-        WHEN ${campaign} = "Biden" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-BIDEN-4x3.png'
-        WHEN ${campaign} = "Buttigieg" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-buttigieg-4x3.png'
-        WHEN ${campaign} = "Warren" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-WARREN-4x3.png'
-        WHEN ${campaign} = "Sanders" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-SANDERS-4x3.png'
-        WHEN ${campaign} = "Yang" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-YANG-4x3.png'
-        WHEN ${campaign} = "Harris" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-HARRIS_4x3.png'
-        WHEN ${campaign} = "Klobuchar" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/02/TOC-KLOBUCHAR-4x3.png'
-        WHEN ${campaign} = "Castro" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-CASTRO_4x3.png'
-        WHEN ${campaign} = "Booker" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-BOOKER-4x3.png'
-        WHEN ${campaign} = "Gabbard" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-GABBARD-4x3.png'
-        WHEN ${campaign} = "Steyer" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/07/TOC-STEYER-4x3.png'
-        WHEN ${campaign} = "Bloomberg" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/11/1115_POLLA-4x3.png'
-        WHEN ${campaign} = "Patrick" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/11/TOC-DEVALPATRICK-4x3.png'
+        WHEN ${campaign} = "Biden" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-BIDEN-4x3.png'
+        WHEN ${campaign} = "Buttigieg" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-buttigieg-4x3.png'
+        WHEN ${campaign} = "Warren" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-WARREN-4x3.png'
+        WHEN ${campaign} = "Sanders" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-SANDERS-4x3.png'
+        WHEN ${campaign} = "Yang" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-YANG-4x3.png'
+        WHEN ${campaign} = "Harris" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-HARRIS_4x3.png'
+        WHEN ${campaign} = "Klobuchar" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/02/TOC-KLOBUCHAR-4x3.png'
+        WHEN ${campaign} = "Castro" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-CASTRO_4x3.png'
+        WHEN ${campaign} = "Booker" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-BOOKER-4x3.png'
+        WHEN ${campaign} = "Gabbard" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-GABBARD-4x3.png'
+        WHEN ${campaign} = "Steyer" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/07/TOC-STEYER-4x3.png'
+        WHEN ${campaign} = "Patrick" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/11/TOC-DEVALPATRICK-4x3.png'
         END ;;
   }
 
