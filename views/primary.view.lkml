@@ -293,6 +293,7 @@ view: primary {
   measure: may_polling {
     label: "May 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -303,6 +304,7 @@ view: primary {
   measure: june_polling {
     label: "June 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -313,6 +315,7 @@ view: primary {
   measure: july_polling {
     label: "July 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -323,6 +326,7 @@ view: primary {
   measure: aug_polling {
     label: "August 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -333,6 +337,7 @@ view: primary {
   measure: sept_polling {
     label: "Sept 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -343,6 +348,7 @@ view: primary {
   measure: oct_polling {
     label: "Oct 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -353,6 +359,7 @@ view: primary {
   measure: nov_polling {
     label: "Nov 2019 Polling Average"
     type: average
+    group_label: "Monthly Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
