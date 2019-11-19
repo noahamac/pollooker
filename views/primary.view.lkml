@@ -173,7 +173,7 @@ view: primary {
 
   dimension: pool {
     type: number
-    sql: ${sample_size} + ${population_full} ;;
+    sql: CONCAT(${sample_size},${population_full}) ;;
   }
 
 
