@@ -261,6 +261,61 @@ view: primary {
       value: EMPTY
     }
   }
+  measure: buttigieg_polling_pct {
+    label: "Buttigieg Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Buttigieg"
+    }
+  }
+  measure: biden_polling_pct {
+    label: "Biden Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Biden"
+    }
+  }
+  measure: warren_polling_pct {
+    label: "Warren Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Warren"
+    }
+  }
+  measure: sanders_polling_pct {
+    label: "Sanders Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Sanders"
+    }
+  }
+  measure: harris_polling_pct {
+    label: "Harris Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Harris"
+    }
+  }
   measure: ia_polling_pct {
     label: "Iowa Polling Average"
     type: average
