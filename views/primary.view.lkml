@@ -219,11 +219,6 @@ view: primary {
     sql: ${TABLE}.url ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [candidate_name, pollster_rating_name, display_name]
-  }
-
   measure: count_polls {
     type: count_distinct
     sql: ${poll_id} ;;
@@ -231,6 +226,7 @@ view: primary {
   }
 
   measure: total_sample {
+    label: "Estimated Sample Size"
     type: sum
     sql: ${sample_size} ;;
   }
