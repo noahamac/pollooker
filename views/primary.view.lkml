@@ -80,6 +80,17 @@ view: primary {
         END ;;
   }
 
+  dimension: mugshot {
+    sql: CASE
+        WHEN ${campaign} = "Biden" THEN 'https://www.pngarchive.com/public/uploads/preview/joe-biden-11559654379btdblaftyw.png'
+        WHEN ${campaign} = "Buttigieg" THEN 'https://p1.hiclipart.com/preview/356/986/507/mad-alfred-e-neuman-png-clipart.jpg'
+        WHEN ${campaign} = "Warren" THEN 'https://banner2.cleanpng.com/20190605/jvi/kisspng-elizabeth-warren-democratic-party-lawrence-busin-5cf75d120d0870.1870178915597150900534.jpg'
+        WHEN ${campaign} = "Sanders" THEN 'https://pngarchive.com/public/uploads/preview/bernie-sanders-11568400822x70y2wn7f9.png'
+        WHEN ${campaign} = "Yang" THEN 'https://www.yang2020.com/wp-content/uploads/bottom_splash_cropped-e1564444946916.gif'
+        WHEN ${campaign} = "Harris" THEN 'https://pngarchive.com/public/uploads/preview/senator-kamala-harris-gives-a-thumbs-down-11568400430f1frhxille.png'
+        END ;;
+  }
+
   dimension: internal {
     type: string
     sql: ${TABLE}.internal ;;
