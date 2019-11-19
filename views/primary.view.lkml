@@ -266,7 +266,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Buttigieg"
@@ -277,7 +277,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Biden"
@@ -288,7 +288,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Warren"
@@ -299,7 +299,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Sanders"
@@ -310,7 +310,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Harris"
@@ -321,7 +321,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Iowa"
@@ -332,7 +332,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Nevada"
@@ -343,7 +343,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Florida"
@@ -354,7 +354,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Texas"
@@ -365,7 +365,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "New Hampshire"
@@ -376,7 +376,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "California"
@@ -387,7 +387,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "South Carolina"
