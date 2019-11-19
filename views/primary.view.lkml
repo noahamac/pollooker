@@ -236,6 +236,7 @@ view: primary {
   }
 
   measure: polling_pct {
+    label: "All Polling Average"
     type: average
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
@@ -243,6 +244,7 @@ view: primary {
   measure: ntl_polling_pct {
     label: "National Polling Average"
     type: average
+    group_label: "State Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -253,6 +255,7 @@ view: primary {
   measure: ia_polling_pct {
     label: "Iowa Polling Average"
     type: average
+    group_label: "State Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -260,9 +263,43 @@ view: primary {
       value: "Iowa"
     }
   }
+  measure: nv_polling_pct {
+    label: "Nevada Polling Average"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Nevada"
+    }
+  }
+  measure: fl_polling_pct {
+    label: "Florida Polling Average"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Florida"
+    }
+  }
+  measure: tx_polling_pct {
+    label: "Texas Polling Average"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Texas"
+    }
+  }
   measure: nh_polling_pct {
     label: "New Hampshire Polling Average"
     type: average
+    group_label: "State Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -273,6 +310,7 @@ view: primary {
   measure: ca_polling_pct {
     label: "California Polling Average"
     type: average
+    group_label: "State Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
     filters: {
@@ -283,6 +321,7 @@ view: primary {
   measure: sc_polling_pct {
     label: "South Carolina Polling Average"
     type: average
+    group_label: "State Polling Average"
     sql: ${pct} ;;
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
     filters: {
