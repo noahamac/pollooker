@@ -80,7 +80,7 @@ view: primary {
         END ;;
   }
 
-  dimension: mugshot {
+  dimension: mugshot_link {
     sql: CASE
         WHEN ${campaign} = "Biden" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-BIDEN-4x3.png?w=575'
         WHEN ${campaign} = "Buttigieg" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-buttigieg-4x3.png?w=575'
@@ -96,6 +96,12 @@ view: primary {
         WHEN ${campaign} = "Bloomberg" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/11/1115_POLLA-4x3.png?w=575'
         WHEN ${campaign} = "Patrick" THEN 'https://fivethirtyeight.com/wp-content/uploads/2019/11/TOC-DEVALPATRICK-4x3.png?w=575'
         END ;;
+  }
+
+  dimension: mugshot {
+    type: string
+    sql: ${mugshot_link};;
+    html: <img src="{{value}}" /> ;;
   }
 
   dimension: internal {
