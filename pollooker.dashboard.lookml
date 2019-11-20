@@ -1,5 +1,5 @@
-- dashboard: pollooker2
-  title: Pollooker2
+- dashboard: pollooker-new
+  title: Pollooker
   layout: newspaper
   elements:
   - title: Biden
