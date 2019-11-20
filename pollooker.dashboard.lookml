@@ -2,56 +2,6 @@
   title: Pollooker
   layout: newspaper
   elements:
-  - title: Untitled
-    name: Untitled
-    model: pollooker
-    explore: primary
-    type: single_value
-    fields: [primary.mugshot]
-    filters:
-      primary.mugshot: https://i.ibb.co/Mnf4KkB/TOC-buttigieg-4x3.png
-    sorts: [primary.mugshot]
-    limit: 500
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen: {}
-    row: 12
-    col: 0
-    width: 4
-    height: 4
-  - title: Untitled (copy)
-    name: Untitled (copy)
-    model: pollooker
-    explore: primary
-    type: single_value
-    fields: [primary.mugshot]
-    filters: {}
-    sorts: [primary.mugshot]
-    limit: 500
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen:
-      Campaign: primary.campaign
-    row: 4
-    col: 0
-    width: 4
-    height: 4
   - title: Biden
     name: Biden
     model: pollooker
@@ -119,56 +69,6 @@
     row: 0
     col: 4
     width: 16
-    height: 4
-  - title: Untitled (copy 2)
-    name: Untitled (copy 2)
-    model: pollooker
-    explore: primary
-    type: single_value
-    fields: [primary.mugshot]
-    filters: {}
-    sorts: [primary.mugshot]
-    limit: 500
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen:
-      Campaign: primary.campaign
-    row: 0
-    col: 0
-    width: 4
-    height: 4
-  - title: Untitled (copy 3)
-    name: Untitled (copy 3)
-    model: pollooker
-    explore: primary
-    type: single_value
-    fields: [primary.mugshot]
-    filters: {}
-    sorts: [primary.mugshot]
-    limit: 500
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen:
-      Campaign: primary.campaign
-    row: 8
-    col: 0
-    width: 4
     height: 4
   - title: Warren
     name: Warren
@@ -826,3 +726,103 @@
     col: 12
     width: 12
     height: 13
+  - title: Untitled (copy 2)
+    name: Untitled (copy 2)
+    model: pollooker
+    explore: primary
+    type: single_value
+    fields: [primary.mugshot]
+    filters: {}
+    sorts: [primary.mugshot]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    listen:
+      Campaign: primary.campaign
+    row: 0
+    col: 0
+    width: 4
+    height: 4
+  - title: Untitled (copy)
+    name: Untitled (copy)
+    model: pollooker
+    explore: primary
+    type: single_value
+    fields: [primary.mugshot]
+    filters:
+      primary.campaign: Warren
+    sorts: [primary.mugshot]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    listen: {}
+    row: 4
+    col: 0
+    width: 4
+    height: 4
+  - title: Untitled (copy 3)
+    name: Untitled (copy 3)
+    model: pollooker
+    explore: primary
+    type: single_value
+    fields: [primary.mugshot]
+    filters:
+      primary.campaign: Sanders
+    sorts: [primary.mugshot]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    listen: {}
+    row: 8
+    col: 0
+    width: 4
+    height: 4
+  - title: Untitled
+    name: Untitled
+    model: pollooker
+    explore: primary
+    type: single_value
+    fields: [primary.mugshot]
+    filters:
+      primary.campaign: Buttigieg
+    sorts: [primary.mugshot]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    listen: {}
+    row: 12
+    col: 0
+    width: 4
+    height: 4
