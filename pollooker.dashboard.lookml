@@ -1,5 +1,5 @@
 - dashboard: pollooker_campaign
-  title: Pollooker Campaign
+  title: Pollooker
   layout: newspaper
   elements:
   - title: Untitled (copy 2)
@@ -21,8 +21,6 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types: {}
-    listen:
-      Campaign: primary.campaign
     row: 0
     col: 0
     width: 4
@@ -46,8 +44,6 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types: {}
-    listen:
-      Campaign: primary.campaign
     row: 4
     col: 0
     width: 4
@@ -71,8 +67,6 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types: {}
-    listen:
-      Campaign: primary.campaign
     row: 8
     col: 0
     width: 4
