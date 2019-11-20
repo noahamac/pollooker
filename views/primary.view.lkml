@@ -83,18 +83,18 @@ view: primary {
   dimension: mugshot_link {
     type: string
     sql: CASE
-        WHEN ${campaign} = "Biden" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-BIDEN-4x3.png'
-        WHEN ${campaign} = "Buttigieg" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-buttigieg-4x3.png'
-        WHEN ${campaign} = "Warren" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-WARREN-4x3.png'
-        WHEN ${campaign} = "Sanders" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-SANDERS-4x3.png'
-        WHEN ${campaign} = "Yang" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/03/TOC-YANG-4x3.png'
-        WHEN ${campaign} = "Harris" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-HARRIS_4x3.png'
-        WHEN ${campaign} = "Klobuchar" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/02/TOC-KLOBUCHAR-4x3.png'
-        WHEN ${campaign} = "Castro" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-CASTRO_4x3.png'
+        WHEN ${campaign} = "Biden" THEN 'https://i.ibb.co/C8T5sQT/TOC-BIDEN-4x3.png'
+        WHEN ${campaign} = "Buttigieg" THEN 'https://i.ibb.co/Mnf4KkB/TOC-buttigieg-4x3.png'
+        WHEN ${campaign} = "Warren" THEN 'https://i.ibb.co/tcHztZw/TOC-WARREN-4x3.png'
+        WHEN ${campaign} = "Sanders" THEN 'https://i.ibb.co/2kqNGLQ/TOC-SANDERS-4x3.png'
+        WHEN ${campaign} = "Yang" THEN 'https://i.ibb.co/ykJzzn0/TOC-YANG-4x3.png'
+        WHEN ${campaign} = "Harris" THEN 'https://i.ibb.co/Tw9pySR/TOC-HARRIS-4x3.png'
+        WHEN ${campaign} = "Klobuchar" THEN 'https://i.ibb.co/kKwvmwS/TOC-KLOBUCHAR-4x3.png'
+        WHEN ${campaign} = "Castro" THEN 'https://i.ibb.co/17X706K/TOC-CASTRO-4x3.png'
         WHEN ${campaign} = "Booker" THEN 'https://i.ibb.co/PF4TYRs/TOC-BOOKER-4x3.png'
-        WHEN ${campaign} = "Gabbard" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/01/TOC-GABBARD-4x3.png'
-        WHEN ${campaign} = "Steyer" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/07/TOC-STEYER-4x3.png'
-        WHEN ${campaign} = "Patrick" THEN 'http://fivethirtyeight.com/wp-content/uploads/2019/11/TOC-DEVALPATRICK-4x3.png'
+        WHEN ${campaign} = "Gabbard" THEN 'https://i.ibb.co/984cBR7/TOC-GABBARD-4x3.png'
+        WHEN ${campaign} = "Steyer" THEN 'https://i.ibb.co/VQFDNq5/TOC-STEYER-4x3.png'
+        WHEN ${campaign} = "Patrick" THEN 'https://i.ibb.co/Y3yCJhh/TOC-DEVALPATRICK-4x3.png'
         END ;;
   }
 
