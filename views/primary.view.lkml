@@ -292,6 +292,17 @@ view: primary {
       value: EMPTY
     }
   }
+  measure: es_polling_pct {
+    label: "Early State Polling Average"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Iowa, New Hampshire, South Carolina, Nevada"
+    }
+  }
   measure: buttigieg_polling_pct {
     label: "Buttigieg Polling Average"
     type: average
