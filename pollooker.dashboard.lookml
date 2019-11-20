@@ -1,5 +1,5 @@
-- dashboard: pollooker_campaign
-  title: Pollooker
+- dashboard: pollooker2
+  title: Pollooker2
   layout: newspaper
   elements:
   - title: Biden
@@ -726,31 +726,6 @@
     col: 12
     width: 12
     height: 13
-  - title: Untitled (copy 2)
-    name: Untitled (copy 2)
-    model: pollooker
-    explore: primary
-    type: single_value
-    fields: [primary.mugshot]
-    filters: {}
-    sorts: [primary.mugshot]
-    limit: 500
-    custom_color_enabled: true
-    show_single_value_title: false
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    listen:
-      Campaign: primary.campaign
-    row: 0
-    col: 0
-    width: 4
-    height: 4
   - title: Untitled (copy)
     name: Untitled (copy)
     model: pollooker
@@ -823,6 +798,32 @@
     series_types: {}
     listen: {}
     row: 12
+    col: 0
+    width: 4
+    height: 4
+  - title: Untitled (copy 2)
+    name: Untitled (copy 2)
+    model: pollooker
+    explore: primary
+    type: single_value
+    fields: [primary.mugshot]
+    filters:
+      primary.campaign: Biden
+    sorts: [primary.mugshot]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    listen:
+      Campaign: primary.campaign
+    row: 0
     col: 0
     width: 4
     height: 4
