@@ -117,7 +117,7 @@ view: primary {
   dimension: wiki {
     type: string
     sql: ${wiki_link};;
-    html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b279fa67d6531d3e383c371cd6dd80d1&size=medium&cache=1" width="200px"/> ;;
+    html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
   }
 
   dimension: internal {
