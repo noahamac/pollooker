@@ -104,6 +104,22 @@ view: primary {
     html: <img src="{{value}}" width="200px"/> ;;
   }
 
+  dimension: wiki_link {
+    type: string
+    sql: CASE
+        WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
+        WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
+        WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
+        WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
+        END ;;
+  }
+
+  dimension: wiki {
+    type: string
+    sql: ${wiki_link};;
+    html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b279fa67d6531d3e383c371cd6dd80d1&size=medium&cache=1" width="200px"/> ;;
+  }
+
   dimension: internal {
     type: string
     sql: ${TABLE}.internal ;;
