@@ -217,6 +217,17 @@ view: primary {
     sql: CONCAT(CAST(${sample_size} as CHAR), " ", ${population_full}) ;;
   }
 
+  measure: top_four {
+    label: "Front-Runners"
+    type: average
+    sql: ${campaign} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Biden, Warren, Sanders, Buttigieg"
+    }
+  }
+
 
   dimension: sample_size_bucket {
     type: tier
