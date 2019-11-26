@@ -4,6 +4,7 @@ view: timeline {
   dimension: date {
     type: string
     sql: ${TABLE}.Date ;;
+    primary_key: yes
   }
 
   measure: count {
