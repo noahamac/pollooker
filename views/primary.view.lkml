@@ -527,4 +527,10 @@ view: primary {
       value: "11"
     }
   }
+  measure: few_polls_null {
+    sql: CASE
+        WHEN ${count_polls} < 4 THEN null
+        ELSE ${count_polls}
+        END ;;
+  }
 }
