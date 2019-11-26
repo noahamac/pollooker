@@ -10,4 +10,5 @@ view: timeline {
     type: count
     drill_fields: []
   }
+
 }
