@@ -13,7 +13,7 @@ persist_with: pollooker_default_datagroup
 
 explore: primary {
   join: timeline {
-    foreign_key: primary.start_date_date
+    sql_on: ${timeline.date} = ${primary.start_date_date} ;;
     type: left_outer
   }
 }
