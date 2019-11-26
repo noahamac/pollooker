@@ -12,8 +12,4 @@ datagroup: pollooker_default_datagroup {
 persist_with: pollooker_default_datagroup
 
 explore: primary {
-  join: timeline {
-    sql_on: ${timeline.date} = ${primary.start_date_date} ;;
-    type: left_outer
-  }
 }
