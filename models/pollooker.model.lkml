@@ -14,7 +14,6 @@ persist_with: pollooker_default_datagroup
 explore: primary {
   join: timeline {
     foreign_key: primary.start_date_date
-    relationship: one_to_many
     type: left_outer
   }
 }
