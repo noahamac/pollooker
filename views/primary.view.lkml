@@ -373,6 +373,72 @@ view: primary {
       value: "Harris"
     }
   }
+  measure: steyer_polling_pct {
+    label: "Steyer Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Steyer"
+    }
+  }
+  measure: bloomberg_polling_pct {
+    label: "Bloomberg Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Bloomberg"
+    }
+  }
+  measure: klobuchar_polling_pct {
+    label: "Klobuchar Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Klobuchar"
+    }
+  }
+  measure: yang_polling_pct {
+    label: "Yang Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Yang"
+    }
+  }
+  measure: gabbard_polling_pct {
+    label: "Gabbard Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Gabbard"
+    }
+  }
+  measure: booker_polling_pct {
+    label: "Booker Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Booker"
+    }
+  }
   measure: ia_polling_pct {
     label: "Iowa Polling Average"
     type: average
