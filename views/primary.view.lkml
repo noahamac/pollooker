@@ -14,6 +14,7 @@ view: primary {
   }
 
   dimension_group: created_at {
+    label: "Published"
     type: time
     timeframes: [
       raw,
@@ -41,6 +42,7 @@ view: primary {
   }
 
   dimension_group: end_date {
+    label: "Poll Close"
     type: time
     timeframes: [
       raw,
@@ -57,7 +59,7 @@ view: primary {
 
   dimension: fte_grade {
     label: "Pollster Grade"
-    description: "Grade assigned by 538's 2020 Pollster review"
+    description: "Grade assigned by 538's 2020 pollster review"
     type: string
     sql: ${TABLE}.fte_grade ;;
   }
@@ -82,6 +84,7 @@ view: primary {
 
   dimension: mugshot_link {
     type: string
+    hidden: yes
     sql: CASE
         WHEN ${campaign} = "Biden" THEN 'https://i.ibb.co/C8T5sQT/TOC-BIDEN-4x3.png'
         WHEN ${campaign} = "Buttigieg" THEN 'https://i.ibb.co/Mnf4KkB/TOC-buttigieg-4x3.png'
@@ -100,25 +103,26 @@ view: primary {
 
   dimension: mugshot {
     type: string
+    label: "Picture"
     sql: ${mugshot_link};;
     html: <img src="{{value}}" width="200px"/> ;;
   }
 
-  dimension: wiki_link {
-    type: string
-    sql: CASE
-        WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
-        WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
-        WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
-        WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
-        END ;;
-  }
+#   dimension: wiki_link {
+#     type: string
+#     sql: CASE
+#         WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
+#         WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
+#         WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
+#         WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
+#         END ;;
+#   }
 
-  dimension: wiki {
-    type: string
-    sql: ${wiki_link};;
-    html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
-  }
+#   dimension: wiki {
+#     type: string
+#     sql: ${wiki_link};;
+#     html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
+#   }
 
   dimension: internal {
     type: string
@@ -134,6 +138,7 @@ view: primary {
   dimension: nationwide_batch {
     type: string
     sql: ${TABLE}.nationwide_batch ;;
+    hidden: yes
   }
 
   dimension: notes {
@@ -161,6 +166,7 @@ view: primary {
   dimension: pct {
     type: string
     sql: ${TABLE}.pct ;;
+    hidden: yes
   }
 
   dimension: poll_id {
@@ -169,6 +175,7 @@ view: primary {
   }
 
   dimension: pollster {
+    label: "Pollster Name"
     type: string
     sql: ${TABLE}.pollster ;;
   }
@@ -191,11 +198,14 @@ view: primary {
   }
 
   dimension: population {
+    description: "[av, lv, rv, v]"
     type: string
     sql: ${TABLE}.population ;;
   }
 
   dimension: population_full {
+    label: "Population and Party"
+    description: "[av, lv, rv, v]-[d,r]"
     type: string
     sql: ${TABLE}.population_full ;;
   }
@@ -244,9 +254,11 @@ view: primary {
   dimension: stage {
     type: string
     sql: ${TABLE}.stage ;;
+    hidden: yes
   }
 
   dimension_group: start_date {
+    label: "Poll Open"
     type: time
     timeframes: [
       raw,
@@ -262,6 +274,7 @@ view: primary {
   }
 
   dimension: state {
+    description: "Capital acronyms (AZ, GA, CA), For National polls, filter: state is blank."
     type: string
     map_layer_name: us_states
     sql: ${TABLE}.state ;;
@@ -274,6 +287,7 @@ view: primary {
   }
 
   dimension: url {
+    description: "Link to full poll report, more information and cross tabs found here."
     type: string
     sql: ${TABLE}.url ;;
   }
