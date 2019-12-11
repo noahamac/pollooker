@@ -31,6 +31,7 @@ view: primary {
   dimension: cycle {
     type: number
     sql: ${TABLE}.cycle ;;
+    hidden: yes
   }
 
   dimension: display_name {
