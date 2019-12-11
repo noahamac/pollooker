@@ -300,7 +300,7 @@ view: primary {
 
   measure: total_sample {
     label: "Estimated Sample Size"
-    type: sum
+    type: number
     sql: ${sample_size} ;;
   }
   measure: days_since_poll {
