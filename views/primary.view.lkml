@@ -31,7 +31,6 @@ view: primary {
   dimension: cycle {
     type: number
     sql: ${TABLE}.cycle ;;
-    hidden: yes
   }
 
   dimension: display_name {
@@ -289,7 +288,10 @@ view: primary {
     type: sum
     sql: ${sample_size} ;;
   }
-
+  measure: days_since_poll {
+    type: number
+    sql: DATEDIFF(${end_date_date}, now()) ;;
+  }
   measure: polling_pct {
     label: "All Polling Average"
     type: average
@@ -304,7 +306,7 @@ view: primary {
     drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
-      value: EMPTY
+      value: "EMPTY"
     }
   }
   measure: es_polling_pct {

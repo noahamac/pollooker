@@ -821,8 +821,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     series_types: {}
-    listen:
-      Campaign: primary.campaign
+    listen: {}
     row: 0
     col: 0
     width: 4
