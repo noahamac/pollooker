@@ -314,7 +314,7 @@ view: primary {
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
   }
   measure: ntl_polling_pct {
-    label: "National Polling Average"
+    label: "National"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -325,7 +325,7 @@ view: primary {
     }
   }
   measure: es_polling_pct {
-    label: "Early State Polling Average"
+    label: "Early State"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -457,7 +457,7 @@ view: primary {
     }
   }
   measure: ia_polling_pct {
-    label: "Iowa Polling Average"
+    label: "Iowa"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -468,7 +468,7 @@ view: primary {
     }
   }
   measure: nv_polling_pct {
-    label: "Nevada Polling Average"
+    label: "Nevada"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -479,7 +479,7 @@ view: primary {
     }
   }
   measure: fl_polling_pct {
-    label: "Florida Polling Average"
+    label: "Florida"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -490,7 +490,7 @@ view: primary {
     }
   }
   measure: tx_polling_pct {
-    label: "Texas Polling Average"
+    label: "Texas"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -501,7 +501,7 @@ view: primary {
     }
   }
   measure: nh_polling_pct {
-    label: "New Hampshire Polling Average"
+    label: "New Hampshire"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -512,7 +512,7 @@ view: primary {
     }
   }
   measure: ca_polling_pct {
-    label: "California Polling Average"
+    label: "California"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
@@ -523,7 +523,7 @@ view: primary {
     }
   }
   measure: sc_polling_pct {
-    label: "South Carolina Polling Average"
+    label: "South Carolina"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
