@@ -171,6 +171,7 @@ view: primary {
 
   dimension: poll_id {
     type: number
+    primary_key: yes
     sql: ${TABLE}.poll_id ;;
   }
 
@@ -295,12 +296,12 @@ view: primary {
   measure: count_polls {
     type: count_distinct
     sql: ${poll_id} ;;
-    drill_fields: [candidate_name, pollster_rating_name, display_name]
+    drill_fields: [start_date_date, end_date_date, candidate_name, pollster_rating_name, display_name, sample_size]
   }
 
   measure: total_sample {
     label: "Estimated Sample Size"
-    type: number
+    type: sum
     sql: ${sample_size} ;;
   }
   measure: days_since_poll {
@@ -311,6 +312,7 @@ view: primary {
     label: "All Polling Average"
     type: average
     sql: ${pct} ;;
+    value_format: "0.00\%"
     drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
   }
   measure: ntl_polling_pct {
@@ -323,6 +325,7 @@ view: primary {
       field: state
       value: "EMPTY"
     }
+    value_format: "0.00\%"
   }
   measure: es_polling_pct {
     label: "Early State"
@@ -334,6 +337,7 @@ view: primary {
       field: state
       value: "Iowa, New Hampshire, South Carolina, Nevada"
     }
+    value_format: "0.00\%"
   }
   measure: buttigieg_polling_pct {
     label: "Buttigieg Polling Average"
@@ -345,6 +349,7 @@ view: primary {
       field: campaign
       value: "Buttigieg"
     }
+    value_format: "0.00\%"
   }
   measure: biden_polling_pct {
     label: "Biden Polling Average"
@@ -356,6 +361,7 @@ view: primary {
       field: campaign
       value: "Biden"
     }
+    value_format: "0.00\%"
   }
   measure: warren_polling_pct {
     label: "Warren Polling Average"
@@ -367,6 +373,7 @@ view: primary {
       field: campaign
       value: "Warren"
     }
+    value_format: "0.00\%"
   }
   measure: sanders_polling_pct {
     label: "Sanders Polling Average"
@@ -378,6 +385,7 @@ view: primary {
       field: campaign
       value: "Sanders"
     }
+    value_format: "0.00\%"
   }
   measure: harris_polling_pct {
     label: "Harris Polling Average"
@@ -389,6 +397,7 @@ view: primary {
       field: campaign
       value: "Harris"
     }
+    value_format: "0.00\%"
   }
   measure: steyer_polling_pct {
     label: "Steyer Polling Average"
@@ -400,6 +409,7 @@ view: primary {
       field: campaign
       value: "Steyer"
     }
+    value_format: "0.00\%"
   }
   measure: bloomberg_polling_pct {
     label: "Bloomberg Polling Average"
@@ -411,6 +421,7 @@ view: primary {
       field: campaign
       value: "Bloomberg"
     }
+    value_format: "0.00\%"
   }
   measure: klobuchar_polling_pct {
     label: "Klobuchar Polling Average"
@@ -422,6 +433,7 @@ view: primary {
       field: campaign
       value: "Klobuchar"
     }
+    value_format: "0.00\%"
   }
   measure: yang_polling_pct {
     label: "Yang Polling Average"
@@ -433,6 +445,7 @@ view: primary {
       field: campaign
       value: "Yang"
     }
+    value_format: "0.00\%"
   }
   measure: gabbard_polling_pct {
     label: "Gabbard Polling Average"
@@ -444,6 +457,7 @@ view: primary {
       field: campaign
       value: "Gabbard"
     }
+    value_format: "0.00\%"
   }
   measure: booker_polling_pct {
     label: "Booker Polling Average"
@@ -455,6 +469,7 @@ view: primary {
       field: campaign
       value: "Booker"
     }
+    value_format: "0.00\%"
   }
   measure: ia_polling_pct {
     label: "Iowa"
@@ -466,6 +481,7 @@ view: primary {
       field: state
       value: "Iowa"
     }
+    value_format: "0.00\%"
   }
   measure: nv_polling_pct {
     label: "Nevada"
@@ -477,6 +493,7 @@ view: primary {
       field: state
       value: "Nevada"
     }
+    value_format: "0.00\%"
   }
   measure: fl_polling_pct {
     label: "Florida"
@@ -488,6 +505,7 @@ view: primary {
       field: state
       value: "Florida"
     }
+    value_format: "0.00\%"
   }
   measure: tx_polling_pct {
     label: "Texas"
@@ -499,6 +517,7 @@ view: primary {
       field: state
       value: "Texas"
     }
+    value_format: "0.00\%"
   }
   measure: nh_polling_pct {
     label: "New Hampshire"
@@ -510,6 +529,7 @@ view: primary {
       field: state
       value: "New Hampshire"
     }
+    value_format: "0.00\%"
   }
   measure: ca_polling_pct {
     label: "California"
@@ -521,6 +541,7 @@ view: primary {
       field: state
       value: "California"
     }
+    value_format: "0.00\%"
   }
   measure: sc_polling_pct {
     label: "South Carolina"
@@ -532,6 +553,7 @@ view: primary {
       field: state
       value: "South Carolina"
     }
+    value_format: "0.00\%"
   }
   measure: may_polling {
     label: "May 2019 Polling Average"
@@ -543,6 +565,7 @@ view: primary {
       field: start_date_month_num
       value: "5"
     }
+    value_format: "0.00\%"
   }
   measure: june_polling {
     label: "June 2019 Polling Average"
@@ -554,6 +577,7 @@ view: primary {
       field: start_date_month_num
       value: "6"
     }
+    value_format: "0.00\%"
   }
   measure: july_polling {
     label: "July 2019 Polling Average"
@@ -565,6 +589,7 @@ view: primary {
       field: start_date_month_num
       value: "7"
     }
+    value_format: "0.00\%"
   }
   measure: aug_polling {
     label: "August 2019 Polling Average"
@@ -576,6 +601,7 @@ view: primary {
       field: start_date_month_num
       value: "8"
     }
+    value_format: "0.00\%"
   }
   measure: sept_polling {
     label: "Sept 2019 Polling Average"
@@ -587,6 +613,7 @@ view: primary {
       field: start_date_month_num
       value: "9"
     }
+    value_format: "0.00\%"
   }
   measure: oct_polling {
     label: "Oct 2019 Polling Average"
@@ -598,6 +625,7 @@ view: primary {
       field: start_date_month_num
       value: "10"
     }
+    value_format: "0.00\%"
   }
   measure: nov_polling {
     label: "Nov 2019 Polling Average"
@@ -609,6 +637,7 @@ view: primary {
       field: start_date_month_num
       value: "11"
     }
+    value_format: "0.00\%"
   }
   measure: few_polls_null {
     sql: CASE
