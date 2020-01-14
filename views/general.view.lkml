@@ -1,16 +1,19 @@
-view: primary {
-  sql_table_name: pollooker.`primary` ;;
+view: general {
+  sql_table_name: pollooker.`general` ;;
 
   dimension: campaign {
     type: string
-    description: "Last names: Biden, Warren, Sanders, Buttigieg, Harris, Yang, Klobuchar, etc"
     sql: ${TABLE}.answer ;;
   }
 
   dimension: candidate_name {
     type: string
     sql: ${TABLE}.candidate_name ;;
-    hidden: yes
+  }
+
+  dimension: candidate_party {
+    type: string
+    sql: ${TABLE}.candidate_party ;;
   }
 
   dimension_group: created_at {
@@ -32,13 +35,16 @@ view: primary {
   dimension: cycle {
     type: number
     sql: ${TABLE}.cycle ;;
-    hidden: yes
   }
 
   dimension: display_name {
     type: string
     sql: ${TABLE}.display_name ;;
-    hidden: yes
+  }
+
+  dimension: election_date {
+    type: string
+    sql: ${TABLE}.election_date ;;
   }
 
   dimension_group: end_date {
@@ -58,76 +64,13 @@ view: primary {
   }
 
   dimension: fte_grade {
-    label: "Pollster Grade"
-    description: "Grade assigned by 538's 2020 pollster review"
     type: string
     sql: ${TABLE}.fte_grade ;;
   }
 
-  dimension: grade_bucket {
-    sql: CASE
-        WHEN ${fte_grade} = "A" THEN 'A'
-        WHEN ${fte_grade} = "A-" THEN 'A'
-        WHEN ${fte_grade} = "A+" THEN 'A'
-        WHEN ${fte_grade} = "B" THEN 'B'
-        WHEN ${fte_grade} = "B-" THEN 'B'
-        WHEN ${fte_grade} = "B+" THEN 'B'
-        WHEN ${fte_grade} = "C" THEN 'C'
-        WHEN ${fte_grade} = "C-" THEN 'C'
-        WHEN ${fte_grade} = "C+" THEN 'C'
-        WHEN ${fte_grade} = "D" THEN 'D'
-        WHEN ${fte_grade} = "D-" THEN 'D'
-        WHEN ${fte_grade} = "D+" THEN 'D'
-        ELSE ${fte_grade}
-        END ;;
-  }
-
-  dimension: mugshot_link {
-    type: string
-    hidden: yes
-    sql: CASE
-        WHEN ${campaign} = "Biden" THEN 'https://i.ibb.co/C8T5sQT/TOC-BIDEN-4x3.png'
-        WHEN ${campaign} = "Buttigieg" THEN 'https://i.ibb.co/Mnf4KkB/TOC-buttigieg-4x3.png'
-        WHEN ${campaign} = "Warren" THEN 'https://i.ibb.co/tcHztZw/TOC-WARREN-4x3.png'
-        WHEN ${campaign} = "Sanders" THEN 'https://i.ibb.co/2kqNGLQ/TOC-SANDERS-4x3.png'
-        WHEN ${campaign} = "Yang" THEN 'https://i.ibb.co/ykJzzn0/TOC-YANG-4x3.png'
-        WHEN ${campaign} = "Harris" THEN 'https://i.ibb.co/Tw9pySR/TOC-HARRIS-4x3.png'
-        WHEN ${campaign} = "Klobuchar" THEN 'https://i.ibb.co/kKwvmwS/TOC-KLOBUCHAR-4x3.png'
-        WHEN ${campaign} = "Castro" THEN 'https://i.ibb.co/17X706K/TOC-CASTRO-4x3.png'
-        WHEN ${campaign} = "Booker" THEN 'https://i.ibb.co/PF4TYRs/TOC-BOOKER-4x3.png'
-        WHEN ${campaign} = "Gabbard" THEN 'https://i.ibb.co/984cBR7/TOC-GABBARD-4x3.png'
-        WHEN ${campaign} = "Steyer" THEN 'https://i.ibb.co/VQFDNq5/TOC-STEYER-4x3.png'
-        WHEN ${campaign} = "Patrick" THEN 'https://i.ibb.co/Y3yCJhh/TOC-DEVALPATRICK-4x3.png'
-        END ;;
-  }
-
-  dimension: mugshot {
-    type: string
-    label: "Picture"
-    sql: ${mugshot_link};;
-    html: <img src="{{value}}" width="200px"/> ;;
-  }
-
-#   dimension: wiki_link {
-#     type: string
-#     sql: CASE
-#         WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
-#         WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
-#         WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
-#         WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
-#         END ;;
-#   }
-
-#   dimension: wiki {
-#     type: string
-#     sql: ${wiki_link};;
-#     html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
-#   }
-
   dimension: internal {
     type: string
     sql: ${TABLE}.internal ;;
-    hidden: yes
   }
 
   dimension: methodology {
@@ -138,7 +81,6 @@ view: primary {
   dimension: nationwide_batch {
     type: string
     sql: ${TABLE}.nationwide_batch ;;
-    hidden: yes
   }
 
   dimension: notes {
@@ -149,34 +91,24 @@ view: primary {
   dimension: office_type {
     type: string
     sql: ${TABLE}.office_type ;;
-    hidden: yes
   }
 
   dimension: partisan {
     type: string
     sql: ${TABLE}.partisan ;;
-    hidden: yes
-  }
-
-  dimension: party {
-    type: string
-    sql: ${TABLE}.party ;;
   }
 
   dimension: pct {
     type: string
     sql: ${TABLE}.pct ;;
-    hidden: yes
   }
 
   dimension: poll_id {
     type: number
-    primary_key: yes
     sql: ${TABLE}.poll_id ;;
   }
 
   dimension: pollster {
-    label: "Pollster Name"
     type: string
     sql: ${TABLE}.pollster ;;
   }
@@ -189,24 +121,19 @@ view: primary {
   dimension: pollster_rating_id {
     type: number
     sql: ${TABLE}.pollster_rating_id ;;
-    hidden: yes
   }
 
   dimension: pollster_rating_name {
     type: string
     sql: ${TABLE}.pollster_rating_name ;;
-    hidden: yes
   }
 
   dimension: population {
-    description: "[av, lv, rv, v]"
     type: string
     sql: ${TABLE}.population ;;
   }
 
   dimension: population_full {
-    label: "Population and Party"
-    description: "[av, lv, rv, v]-[d,r]"
     type: string
     sql: ${TABLE}.population_full ;;
   }
@@ -214,7 +141,11 @@ view: primary {
   dimension: question_id {
     type: number
     sql: ${TABLE}.question_id ;;
-    hidden: yes
+  }
+
+  dimension: ranked_choice_reallocated {
+    type: string
+    sql: ${TABLE}.ranked_choice_reallocated ;;
   }
 
   dimension: sample_size {
@@ -222,29 +153,24 @@ view: primary {
     sql: ${TABLE}.sample_size ;;
   }
 
-  dimension: pool {
-    label: "Sample & Population"
+  dimension: seat_name {
     type: string
-    sql: CONCAT(CAST(${sample_size} as CHAR), " ", ${population_full}) ;;
+    sql: ${TABLE}.seat_name ;;
   }
 
-  dimension: sample_size_bucket {
-    type: tier
-    tiers: [200, 400, 800, 1000]
-    style: integer
-    sql: ${sample_size} ;;
+  dimension: seat_number {
+    type: number
+    sql: ${TABLE}.seat_number ;;
   }
 
   dimension: sponsor_candidate {
     type: string
     sql: ${TABLE}.sponsor_candidate ;;
-    hidden: yes
   }
 
   dimension: sponsor_ids {
     type: string
     sql: ${TABLE}.sponsor_ids ;;
-    hidden: yes
   }
 
   dimension: sponsors {
@@ -255,7 +181,6 @@ view: primary {
   dimension: stage {
     type: string
     sql: ${TABLE}.stage ;;
-    hidden: yes
   }
 
   dimension_group: start_date {
@@ -275,38 +200,23 @@ view: primary {
   }
 
   dimension: state {
-    description: "Capital acronyms (AZ, GA, CA), For National polls, filter: state is blank."
     type: string
-    map_layer_name: us_states
     sql: ${TABLE}.state ;;
   }
 
   dimension: tracking {
     type: string
     sql: ${TABLE}.tracking ;;
-    hidden: yes
   }
 
   dimension: url {
-    description: "Link to full poll report, more information and cross tabs found here."
     type: string
     sql: ${TABLE}.url ;;
   }
 
-  measure: count_polls {
-    type: count_distinct
-    sql: ${poll_id} ;;
-    drill_fields: [start_date_date, end_date_date, candidate_name, pollster_rating_name, display_name, sample_size]
-  }
-
-  measure: total_sample {
-    label: "Estimated Sample Size"
-    type: sum
-    sql: ${sample_size} ;;
-  }
-  measure: days_since_poll {
-    type: number
-    sql: DATEDIFF(${end_date_date}, now()) ;;
+  measure: count {
+    type: count
+    drill_fields: [seat_name, candidate_name, display_name, pollster_rating_name]
   }
   measure: polling_pct {
     label: "All Polling Average"
@@ -384,6 +294,18 @@ view: primary {
     filters: {
       field: campaign
       value: "Sanders"
+    }
+    value_format: "0.00\%"
+  }
+  measure: trump_polling_pct {
+    label: "Trump Polling Average"
+    type: average
+    group_label: "Campaign Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: campaign
+      value: "Trump"
     }
     value_format: "0.00\%"
   }
@@ -638,39 +560,5 @@ view: primary {
       value: "11"
     }
     value_format: "0.00\%"
-  }
-  measure: dec_polling {
-    label: "Dec 2019 Polling Average"
-    type: average
-    group_label: "Monthly Polling Average"
-    sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
-    filters: {
-      field: start_date_month_num
-      value: "12"
-    }
-    value_format: "0.00\%"
-  }
-  measure: jan_polling {
-    label: "Jan 2020 Polling Average"
-    type: average
-    group_label: "Monthly Polling Average"
-    sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
-    filters: {
-      field: start_date_month_num
-      value: "1"
-    }
-    filters: {
-      field: start_date_year
-      value: "2020"
-    }
-    value_format: "0.00\%"
-  }
-  measure: few_polls_null {
-    sql: CASE
-        WHEN ${count_polls} < 4 THEN null
-        ELSE ${count_polls}
-        END ;;
   }
 }

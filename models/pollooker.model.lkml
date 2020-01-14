@@ -14,6 +14,8 @@ persist_with: pollooker_default_datagroup
 explore: primary {
 }
 
+explore: general {}
+
 explore: contributions {
   join: committees {
     type: left_outer
