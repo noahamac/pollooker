@@ -298,7 +298,10 @@ view: primary {
     description: "Capital acronyms (AZ, GA, CA), For National polls, filter: state is blank."
     type: string
     map_layer_name: us_states
-    sql: ${TABLE}.state ;;
+    sql: CASE
+        WHEN "National" THEN ""
+        ELSE ${TABLE}.state
+        END ;;
   }
 
   dimension: tracking {
