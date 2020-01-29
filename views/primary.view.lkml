@@ -101,6 +101,15 @@ view: primary {
         END ;;
   }
 
+  measure: kpi {
+    sql: CASE
+        WHEN ${state} = "Iowa" THEN ${ia_polling_pct}
+        WHEN ${state} = "New Hampshire" THEN ${nh_polling_pct}
+        WHEN ${state} = "South Carolina" THEN ${sc_polling_pct}
+        WHEN ${state} = "Nevada" THEN ${nv_polling_pct}
+        END ;;
+  }
+
   dimension: mugshot {
     type: string
     label: "Picture"
@@ -164,9 +173,20 @@ view: primary {
   }
 
   dimension: pct {
-    type: string
+    type: number
     sql: ${TABLE}.pct ;;
-    hidden: yes
+  }
+
+  dimension: pct_round {
+    type: number
+    sql: CAST(${TABLE}.pct AS DECIMAL(10,0)) ;;
+  }
+
+  dimension: pct_tier {
+    type: tier
+    tiers: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]
+    style: integer
+    sql: ${pct_round} ;;
   }
 
   dimension: poll_id {
@@ -296,7 +316,7 @@ view: primary {
   measure: count_polls {
     type: count_distinct
     sql: ${poll_id} ;;
-    drill_fields: [start_date_date, end_date_date, candidate_name, pollster_rating_name, display_name, sample_size]
+    drill_fields: [start_date_date, end_date_date, candidate_name, pollster_rating_name, display_name, sample_size,pct]
   }
 
   measure: total_sample {
@@ -307,6 +327,43 @@ view: primary {
   measure: days_since_poll {
     type: number
     sql: DATEDIFF(${end_date_date}, now()) ;;
+  }
+  measure: polling_pct_min {
+    label: "MIN"
+    type: min
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_max {
+    label: "MAX"
+    type: max
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_median {
+    label: "MEDIAN"
+    type: median
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_first {
+    label: "1Q"
+    type: percentile
+    percentile: 25
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_fourth {
+    label: "4Q"
+    type: percentile
+    percentile: 75
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
   }
   measure: polling_pct {
     label: "All Polling Average"
