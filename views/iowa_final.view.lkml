@@ -45,6 +45,7 @@ view: iowa_final {
   measure: delegates {
     type: sum
     sql: ${sde} ;;
+    value_format_name: decimal_1
   }
 
   measure: count {

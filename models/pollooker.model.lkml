@@ -9,6 +9,12 @@ datagroup: pollooker_default_datagroup {
   max_cache_age: "1 hour"
 }
 
+map_layer: iowa {
+  format: topojson
+  label: "Iowa"
+  url: "https://raw.githubusercontent.com/yooper/open-model/master/geodata/topojson/united_states/Iowa.topo.json" # or use the file subparameter
+}
+
 persist_with: pollooker_default_datagroup
 
 explore: primary {
