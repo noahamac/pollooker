@@ -117,6 +117,15 @@ view: primary {
     html: <img src="{{value}}" width="200px"/> ;;
   }
 
+  measure: dot {
+    type: number
+    label: "Bubble"
+    sql: ${ia_polling_pct} ;;
+    html: <img src="https://pngimg.com/uploads/dot/dot_PNG31.png" width={{value * 100}}/> ;;
+  }
+
+
+
 #   dimension: wiki_link {
 #     type: string
 #     sql: CASE

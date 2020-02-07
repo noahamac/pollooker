@@ -28,3 +28,6 @@ explore: contributions {
     relationship: many_to_one
   }
 }
+
+explore: results {}
+explore: iowa_final {}
