@@ -8,6 +8,7 @@ view: iowa_final {
 
   dimension: county {
     type: string
+    map_layer_name: iowa
     sql: ${TABLE}.county ;;
   }
 
