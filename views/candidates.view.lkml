@@ -136,18 +136,18 @@ view: candidates {
     sql: ${TABLE}.TRANS_TO_AUTH ;;
   }
 
-  dimension: ttl_disb {
-    type: string
+  measure: ttl_disb {
+    type: sum
     sql: ${TABLE}.TTL_DISB ;;
   }
 
-  dimension: ttl_indiv_contrib {
-    type: string
+  measure: ttl_indiv_contrib {
+    type: sum
     sql: ${TABLE}.TTL_INDIV_CONTRIB ;;
   }
 
-  dimension: ttl_receipts {
-    type: string
+  measure: ttl_receipts {
+    type: sum
     sql: ${TABLE}.TTL_RECEIPTS ;;
   }
 

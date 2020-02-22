@@ -1,18 +1,8 @@
 view: primary {
   sql_table_name: pollooker.`primary` ;;
 
-  dimension: campaign {
-    type: string
-    description: "Last names: Biden, Warren, Sanders, Buttigieg, Harris, Yang, Klobuchar, etc"
-    sql: ${TABLE}.answer ;;
-  }
 
-  dimension: candidate_name {
-    type: string
-    sql: ${TABLE}.candidate_name ;;
-    hidden: yes
-  }
-
+  # Date dimensions
   dimension_group: created_at {
     label: "Published"
     type: time
@@ -28,19 +18,22 @@ view: primary {
     ]
     sql: STR_TO_DATE(${TABLE}.created_at, '%m/%d/%y %H:%i') ;;
   }
-
-  dimension: cycle {
-    type: number
-    sql: ${TABLE}.cycle ;;
-    hidden: yes
+  dimension_group: start_date {
+    label: "Poll Open"
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      month_num,
+      quarter,
+      year
+    ]
+    sql: STR_TO_DATE(${TABLE}.start_date, '%m/%d/%y %H:%i') ;;
+    html: {{rendered_value | date: "%D" }};;
   }
-
-  dimension: display_name {
-    type: string
-    sql: ${TABLE}.display_name ;;
-    hidden: yes
-  }
-
   dimension_group: end_date {
     label: "Poll Close"
     type: time
@@ -55,15 +48,76 @@ view: primary {
       year
     ]
     sql: STR_TO_DATE(${TABLE}.end_date, '%m/%d/%y %H:%i') ;;
+    html: {{rendered_value | date: "%D" }};;
   }
 
+  # Poll fact fields
+  dimension: state {
+    description: "Capital acronyms (AZ, GA, CA), For National polls, filter: state is blank."
+    type: string
+    map_layer_name: us_states
+    sql: CASE
+        WHEN "National" THEN ""
+        ELSE ${TABLE}.state
+        END ;;
+  }
+  dimension: sponsors {
+    type: string
+    sql: ${TABLE}.sponsors ;;
+  }
+  dimension: sample_size_bucket {
+    type: tier
+    tiers: [200, 400, 800, 1000]
+    style: integer
+    sql: ${sample_size} ;;
+  }
+  dimension: pool {
+    label: "Sample & Population"
+    type: string
+    sql: CONCAT(CAST(${sample_size} as CHAR), " ", ${population_full}) ;;
+  }
+  dimension: sample_size {
+    type: number
+    sql: ${TABLE}.sample_size ;;
+  }
+  dimension: cycle {
+    type: number
+    sql: ${TABLE}.cycle ;;
+  }
+  dimension: party {
+    type: string
+    sql: ${TABLE}.party ;;
+  }
+  dimension: pct {
+    type: number
+    sql: ${TABLE}.pct ;;
+  }
+  dimension: pct_round {
+    type: number
+    sql: CAST(${TABLE}.pct AS DECIMAL(10,0)) ;;
+  }
+  dimension: pct_tier {
+    type: tier
+    tiers: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]
+    style: integer
+    sql: ${pct_round} ;;
+  }
+  dimension: pollster {
+    label: "Pollster Name"
+    type: string
+    sql: ${TABLE}.pollster ;;
+  }
+  dimension: campaign {
+    type: string
+    description: "Last names: Biden, Warren, Sanders, Buttigieg, Harris, Yang, Klobuchar, etc"
+    sql: ${TABLE}.answer ;;
+  }
   dimension: fte_grade {
     label: "Pollster Grade"
     description: "Grade assigned by 538's 2020 pollster review"
     type: string
     sql: ${TABLE}.fte_grade ;;
   }
-
   dimension: grade_bucket {
     sql: CASE
         WHEN ${fte_grade} = "A" THEN 'A'
@@ -81,7 +135,122 @@ view: primary {
         ELSE ${fte_grade}
         END ;;
   }
+  dimension: mugshot {
+    type: string
+    label: "Picture"
+    sql: ${mugshot_link};;
+    html: <img src="{{value}}" width="200px"/> ;;
+  }
+  dimension: methodology {
+    type: string
+    sql: ${TABLE}.methodology ;;
+  }
+  dimension: notes {
+    description: "Filter out head-to-head polls"
+    type: string
+    sql: ${TABLE}.notes ;;
+  }
 
+  # Other
+  dimension: url {
+    description: "Link to full poll report, more information and cross tabs found here."
+    type: string
+    sql: ${TABLE}.url ;;
+  }
+  dimension: tracking {
+    type: string
+    sql: ${TABLE}.tracking ;;
+    hidden: yes
+  }
+  dimension: stage {
+    type: string
+    sql: ${TABLE}.stage ;;
+    hidden: yes
+  }
+  dimension: sponsor_ids {
+    type: string
+    sql: ${TABLE}.sponsor_ids ;;
+    hidden: yes
+  }
+  dimension: question_id {
+    type: number
+    sql: ${TABLE}.question_id ;;
+    hidden: yes
+  }
+  dimension: sponsor_candidate {
+    type: string
+    sql: ${TABLE}.sponsor_candidate ;;
+    hidden: yes
+  }
+  dimension: population_full {
+    label: "Population and Party"
+    description: "[av, lv, rv, v]-[d,r]"
+    type: string
+    sql: ${TABLE}.population_full ;;
+    hidden: yes
+  }
+  dimension: population {
+    description: "[av, lv, rv, v]"
+    type: string
+    sql: ${TABLE}.population ;;
+    hidden: yes
+  }
+  dimension: wiki_link {
+     type: string
+     sql: CASE
+         WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
+         WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
+         WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
+         WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
+         END ;;
+      hidden: yes
+  }
+  dimension: wiki {
+     type: string
+     sql: ${wiki_link};;
+    hidden: yes
+     html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
+   }
+  dimension: poll_id {
+      type: number
+      primary_key: yes
+      sql: ${TABLE}.poll_id ;;
+    }
+  dimension: pollster_rating_id {
+      type: number
+      sql: ${TABLE}.pollster_rating_id ;;
+      hidden: yes
+    }
+  dimension: pollster_rating_name {
+      type: string
+      sql: ${TABLE}.pollster_rating_name ;;
+      hidden: yes
+    }
+  dimension: candidate_name {
+    type: string
+    sql: ${TABLE}.candidate_name ;;
+    hidden: yes
+  }
+  dimension: display_name {
+    type: string
+    sql: ${TABLE}.display_name ;;
+    hidden: yes
+  }
+  dimension: office_type {
+    type: string
+    sql: ${TABLE}.office_type ;;
+    hidden: yes
+  }
+  dimension: partisan {
+    type: string
+    sql: ${TABLE}.partisan ;;
+    hidden: yes
+  }
+  dimension: pollster_id {
+    type: number
+    sql: ${TABLE}.pollster_id ;;
+    hidden: yes
+  }
   dimension: mugshot_link {
     type: string
     hidden: yes
@@ -100,7 +269,6 @@ view: primary {
         WHEN ${campaign} = "Patrick" THEN 'https://i.ibb.co/Y3yCJhh/TOC-DEVALPATRICK-4x3.png'
         END ;;
   }
-
   measure: kpi {
     sql: CASE
         WHEN ${state} = "Iowa" THEN ${ia_polling_pct}
@@ -108,229 +276,71 @@ view: primary {
         WHEN ${state} = "South Carolina" THEN ${sc_polling_pct}
         WHEN ${state} = "Nevada" THEN ${nv_polling_pct}
         END ;;
+    hidden: yes
   }
-
-  dimension: mugshot {
-    type: string
-    label: "Picture"
-    sql: ${mugshot_link};;
-    html: <img src="{{value}}" width="200px"/> ;;
-  }
-
   measure: dot {
     type: number
     label: "Bubble"
     sql: ${ia_polling_pct} ;;
+    hidden: yes
     html: <img src="https://pngimg.com/uploads/dot/dot_PNG31.png" width={{value * 100}}/> ;;
   }
-
-
-
-#   dimension: wiki_link {
-#     type: string
-#     sql: CASE
-#         WHEN ${campaign} = "Biden" THEN 'Joe_Biden'
-#         WHEN ${campaign} = "Buttigieg" THEN 'Pete_Buttigieg'
-#         WHEN ${campaign} = "Warren" THEN 'Elizabeth_Warren'
-#         WHEN ${campaign} = "Sanders" THEN 'Bernie_Sanders'
-#         END ;;
-#   }
-
-#   dimension: wiki {
-#     type: string
-#     sql: ${wiki_link};;
-#     html: <img src="http://webthumb.bluga.net/easythumb.php?user=79569&url=https://en.wikipedia.org/wiki/Pete_Buttigieg&hash=b8f5cb59ca9553c4770660263323ebde&size=medium&cache=1" width="200px"/> ;;
-#   }
-
   dimension: internal {
     type: string
     sql: ${TABLE}.internal ;;
     hidden: yes
   }
-
-  dimension: methodology {
-    type: string
-    sql: ${TABLE}.methodology ;;
-  }
-
   dimension: nationwide_batch {
     type: string
     sql: ${TABLE}.nationwide_batch ;;
     hidden: yes
   }
 
-  dimension: notes {
-    type: string
-    sql: ${TABLE}.notes ;;
-  }
-
-  dimension: office_type {
-    type: string
-    sql: ${TABLE}.office_type ;;
-    hidden: yes
-  }
-
-  dimension: partisan {
-    type: string
-    sql: ${TABLE}.partisan ;;
-    hidden: yes
-  }
-
-  dimension: party {
-    type: string
-    sql: ${TABLE}.party ;;
-  }
-
-  dimension: pct {
-    type: number
-    sql: ${TABLE}.pct ;;
-  }
-
-  dimension: pct_round {
-    type: number
-    sql: CAST(${TABLE}.pct AS DECIMAL(10,0)) ;;
-  }
-
-  dimension: pct_tier {
-    type: tier
-    tiers: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]
-    style: integer
+  #Boxplot measures
+  measure: polling_pct_min {
+    label: "MIN"
+    type: min
     sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_max {
+    label: "MAX"
+    type: max
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_median {
+    label: "MEDIAN"
+    type: median
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_first {
+    label: "1Q"
+    type: percentile
+    percentile: 25
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
+  }
+  measure: polling_pct_fourth {
+    label: "4Q"
+    type: percentile
+    percentile: 75
+    sql: ${pct_round} ;;
+    value_format: "0.00\%"
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
   }
 
-  dimension: poll_id {
-    type: number
-    primary_key: yes
-    sql: ${TABLE}.poll_id ;;
-  }
-
-  dimension: pollster {
-    label: "Pollster Name"
-    type: string
-    sql: ${TABLE}.pollster ;;
-  }
-
-  dimension: pollster_id {
-    type: number
-    sql: ${TABLE}.pollster_id ;;
-  }
-
-  dimension: pollster_rating_id {
-    type: number
-    sql: ${TABLE}.pollster_rating_id ;;
-    hidden: yes
-  }
-
-  dimension: pollster_rating_name {
-    type: string
-    sql: ${TABLE}.pollster_rating_name ;;
-    hidden: yes
-  }
-
-  dimension: population {
-    description: "[av, lv, rv, v]"
-    type: string
-    sql: ${TABLE}.population ;;
-  }
-
-  dimension: population_full {
-    label: "Population and Party"
-    description: "[av, lv, rv, v]-[d,r]"
-    type: string
-    sql: ${TABLE}.population_full ;;
-  }
-
-  dimension: question_id {
-    type: number
-    sql: ${TABLE}.question_id ;;
-    hidden: yes
-  }
-
-  dimension: sample_size {
-    type: number
-    sql: ${TABLE}.sample_size ;;
-  }
-
-  dimension: pool {
-    label: "Sample & Population"
-    type: string
-    sql: CONCAT(CAST(${sample_size} as CHAR), " ", ${population_full}) ;;
-  }
-
-  dimension: sample_size_bucket {
-    type: tier
-    tiers: [200, 400, 800, 1000]
-    style: integer
-    sql: ${sample_size} ;;
-  }
-
-  dimension: sponsor_candidate {
-    type: string
-    sql: ${TABLE}.sponsor_candidate ;;
-    hidden: yes
-  }
-
-  dimension: sponsor_ids {
-    type: string
-    sql: ${TABLE}.sponsor_ids ;;
-    hidden: yes
-  }
-
-  dimension: sponsors {
-    type: string
-    sql: ${TABLE}.sponsors ;;
-  }
-
-  dimension: stage {
-    type: string
-    sql: ${TABLE}.stage ;;
-    hidden: yes
-  }
-
-  dimension_group: start_date {
-    label: "Poll Open"
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      month_num,
-      quarter,
-      year
-    ]
-    sql: STR_TO_DATE(${TABLE}.start_date, '%m/%d/%y %H:%i') ;;
-  }
-
-  dimension: state {
-    description: "Capital acronyms (AZ, GA, CA), For National polls, filter: state is blank."
-    type: string
-    map_layer_name: us_states
-    sql: CASE
-        WHEN "National" THEN ""
-        ELSE ${TABLE}.state
-        END ;;
-  }
-
-  dimension: tracking {
-    type: string
-    sql: ${TABLE}.tracking ;;
-    hidden: yes
-  }
-
-  dimension: url {
-    description: "Link to full poll report, more information and cross tabs found here."
-    type: string
-    sql: ${TABLE}.url ;;
-  }
-
+  # Util meausres
   measure: count_polls {
     type: count_distinct
     sql: ${poll_id} ;;
-    drill_fields: [start_date_date, end_date_date, candidate_name, pollster_rating_name, display_name, sample_size,pct]
+    drill_fields: [start_date_date, end_date_date, state, candidate_name, pollster_rating_name, display_name, sample_size,pct]
   }
-
   measure: total_sample {
     label: "Estimated Sample Size"
     type: sum
@@ -340,56 +350,21 @@ view: primary {
     type: number
     sql: DATEDIFF(${end_date_date}, now()) ;;
   }
-  measure: polling_pct_min {
-    label: "MIN"
-    type: min
-    sql: ${pct_round} ;;
-    value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
-  }
-  measure: polling_pct_max {
-    label: "MAX"
-    type: max
-    sql: ${pct_round} ;;
-    value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
-  }
-  measure: polling_pct_median {
-    label: "MEDIAN"
-    type: median
-    sql: ${pct_round} ;;
-    value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
-  }
-  measure: polling_pct_first {
-    label: "1Q"
-    type: percentile
-    percentile: 25
-    sql: ${pct_round} ;;
-    value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
-  }
-  measure: polling_pct_fourth {
-    label: "4Q"
-    type: percentile
-    percentile: 75
-    sql: ${pct_round} ;;
-    value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw, pct]
-  }
+
+  #General avg measures
   measure: polling_pct {
     label: "All Polling Average"
     type: average
     sql: ${pct} ;;
     value_format: "0.00\%"
-    drill_fields: [candidate_name, pollster_rating_name, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw]
   }
   measure: ntl_polling_pct {
     label: "National"
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "EMPTY"
@@ -401,19 +376,32 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Iowa, New Hampshire, South Carolina, Nevada"
     }
     value_format: "0.00\%"
   }
+  measure: super_tuesday_polling_pct {
+    label: "Super Tuesday"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Alabama, Arkansas, California, Colorado, Maine, Massachusetts, Minnesota, North Carolina, Oklahoma, Tennessee, Texas, Utah, Vermont, Virginia"
+    }
+    value_format: "0.00\%"
+  }
+  # Candidate measures
   measure: buttigieg_polling_pct {
     label: "Buttigieg Polling Average"
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Buttigieg"
@@ -425,7 +413,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Biden"
@@ -437,7 +425,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Warren"
@@ -449,7 +437,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Sanders"
@@ -461,7 +449,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Harris"
@@ -473,7 +461,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Steyer"
@@ -485,7 +473,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Bloomberg"
@@ -497,7 +485,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Klobuchar"
@@ -509,7 +497,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Yang"
@@ -521,7 +509,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Gabbard"
@@ -533,7 +521,7 @@ view: primary {
     type: average
     group_label: "Campaign Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: campaign
       value: "Booker"
@@ -545,7 +533,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name,state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Iowa"
@@ -557,7 +545,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Nevada"
@@ -569,7 +557,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Florida"
@@ -581,7 +569,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "Texas"
@@ -593,7 +581,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "New Hampshire"
@@ -605,7 +593,7 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "California"
@@ -617,13 +605,15 @@ view: primary {
     type: average
     group_label: "State Polling Average"
     sql: ${pct} ;;
-    drill_fields: [candidate_name, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     filters: {
       field: state
       value: "South Carolina"
     }
     value_format: "0.00\%"
   }
+
+  # Date measures
   measure: may_polling {
     label: "May 2019 Polling Average"
     type: average
@@ -736,10 +726,14 @@ view: primary {
     }
     value_format: "0.00\%"
   }
+
+  # Testing something...
   measure: few_polls_null {
+    hidden: yes
     sql: CASE
         WHEN ${count_polls} < 4 THEN null
         ELSE ${count_polls}
         END ;;
   }
+
 }

@@ -36,4 +36,10 @@ explore: contributions {
 }
 
 explore: results {}
-explore: iowa_final {}
+explore: iowa_final {
+  join: primary {
+    type: left_outer
+    sql_on: ${iowa_final.candidate} = ${primary.campaign} ;;
+    relationship: many_to_one
+  }
+}
