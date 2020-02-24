@@ -32,7 +32,7 @@ view: primary {
       year
     ]
     sql: STR_TO_DATE(${TABLE}.start_date, '%m/%d/%y %H:%i') ;;
-    html: {{rendered_value | date: "%D" }};;
+#     html: {{rendered_value | date: "%D" }};;
   }
   dimension_group: end_date {
     label: "Poll Close"
@@ -392,6 +392,30 @@ view: primary {
     filters: {
       field: state
       value: "Alabama, Arkansas, California, Colorado, Maine, Massachusetts, Minnesota, North Carolina, Oklahoma, Tennessee, Texas, Utah, Vermont, Virginia"
+    }
+    value_format: "0.00\%"
+  }
+  measure: swing_states_polling_pct {
+    label: "Swing States"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Colorado, Florida, Iowa, Michigan, Minnesota, Ohio, Nevada, New Hampshire, North Carolina, Pennsylvania, Virginia, Wisconsin"
+    }
+    value_format: "0.00\%"
+  }
+  measure: trump_states_polling_pct {
+    label: "Trump States"
+    type: average
+    group_label: "State Polling Average"
+    sql: ${pct} ;;
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    filters: {
+      field: state
+      value: "Alabama,Alaska,Arizona,Arkansas,Florida,Georgia,Idaho,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Michigan,Mississippi,Missouri,Montana,Nebraska,North Carolina,North Dakota,Ohio,Oklahoma,Pennsylvania,South Carolina,South Dakota,Tennessee,Texas,Utah,West Virginia,Wisconsin,Wyoming"
     }
     value_format: "0.00\%"
   }

@@ -14,10 +14,30 @@ map_layer: iowa {
   label: "Iowa"
   url: "https://raw.githubusercontent.com/yooper/open-model/master/geodata/topojson/united_states/Iowa.topo.json" # or use the file subparameter
 }
-
+week_start_day: sunday
 persist_with: pollooker_default_datagroup
 
 explore: primary {
+  join: trends_bernie {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${trends_bernie.week} ;;
+    relationship: one_to_one
+  }
+  join: trends_pete {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${trends_pete.week} ;;
+    relationship: one_to_one
+  }
+  join: trends_joe {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${trends_joe.week} ;;
+    relationship: one_to_one
+  }
+  join: trends_liz {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${trends_liz.week} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: general {}
