@@ -18,6 +18,7 @@ week_start_day: sunday
 persist_with: pollooker_default_datagroup
 
 explore: primary {
+  # Weekly Google index
   join: trends_bernie {
     type: left_outer
     sql_on: ${primary.start_date_week} = ${trends_bernie.week} ;;
@@ -38,9 +39,46 @@ explore: primary {
     sql_on: ${primary.start_date_week} = ${trends_liz.week} ;;
     relationship: one_to_one
   }
+  join: trends_geo_bernie {
+    type: left_outer
+    sql_on: ${primary.state} = ${trends_geo_bernie.region} ;;
+    relationship: one_to_one
+  }
+  join: trends_geo_pete {
+    type: left_outer
+    sql_on: ${primary.state} = ${trends_geo_pete.region} ;;
+    relationship: one_to_one
+  }
+  join: trends_geo_joe {
+    type: left_outer
+    sql_on: ${primary.state} = ${trends_geo_joe.region} ;;
+    relationship: one_to_one
+  }
+  join: trends_geo_liz {
+    type: left_outer
+    sql_on: ${primary.state} = ${trends_geo_liz.region} ;;
+    relationship: one_to_one
+  }
+  join: sc_comp {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${sc_comp.week} ;;
+    relationship: one_to_one
+  }
+  join: national_comp {
+    type: left_outer
+    sql_on: ${primary.start_date_week} = ${national_comp.week} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: general {}
+
+explore: result_mse {
+#   join: primary {
+#     sql_on: ${result_mse.days_to_contest} = ${primary.days_to_contest} ;;
+#     relationship: one_to_one
+#   }
+}
 
 explore: contributions {
   join: committees {

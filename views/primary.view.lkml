@@ -193,7 +193,7 @@ view: primary {
     description: "[av, lv, rv, v]"
     type: string
     sql: ${TABLE}.population ;;
-    hidden: yes
+    hidden: no
   }
   dimension: wiki_link {
      type: string
@@ -350,6 +350,30 @@ view: primary {
     type: number
     sql: DATEDIFF(${end_date_date}, now()) ;;
   }
+  measure: days_to_contest {
+    label: "Days to Contest"
+    sql: CASE
+        WHEN ${state} = "Iowa" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/02/2020", '%m/%d/%y') )))
+        WHEN ${state} = "New Hampshire" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/11/2020", '%m/%d/%y') )))
+        WHEN ${state} = "South Carolina" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/29/2020", '%m/%d/%y') )))
+        WHEN ${state} = "Nevada" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/22/2020", '%m/%d/%y') )))
+        END ;;
+    type: number
+  }
+  measure: mse {
+    label: "Mean Standard Error"
+    sql: CASE
+        WHEN ${state} = "Iowa" AND ${campaign} = "Buttigieg" THEN 26.2 - ${polling_pct} / 26.2 * 100
+        WHEN ${state} = "Iowa" AND ${campaign} = "Sanders" THEN 26.2 - ${polling_pct} / 26.2 * 100
+        WHEN ${state} = "Iowa" AND ${campaign} = "Warren" THEN 18 - ${polling_pct} / 18 * 100
+        WHEN ${state} = "Iowa" AND ${campaign} = "Biden" THEN 6 - ${polling_pct} / 6 * 100
+        WHEN ${state} = "Iowa" AND ${campaign} = "Klobuchar" THEN 12.3 - ${polling_pct} / 12.3 * 100
+        WHEN ${state} = "Iowa" AND ${campaign} = "Steyer" THEN 0.3 - ${polling_pct} / 0.3 * 100
+        WHEN ${state} = "New Hampshire" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/11/2020", '%m/%d/%y') )))
+        WHEN ${state} = "Nevada" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/22/2020", '%m/%d/%y') )))
+        END ;;
+    type: number
+  }
 
   #General avg measures
   measure: polling_pct {
@@ -454,6 +478,22 @@ view: primary {
       field: campaign
       value: "Warren"
     }
+    value_format: "0.00\%"
+  }
+  measure: progressive_polling_pct {
+    label: "Progressive Polling Average"
+    type: number
+    group_label: "Campaign Polling Average"
+    sql: ${sanders_polling_pct} + ${warren_polling_pct} ;;
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
+    value_format: "0.00\%"
+  }
+  measure: center_left_polling_pct {
+    label: "Center Left Polling Average"
+    type: number
+    group_label: "Campaign Polling Average"
+    sql: ${buttigieg_polling_pct} + ${klobuchar_polling_pct} + ${biden_polling_pct} + ${bloomberg_polling_pct} ;;
+    drill_fields: [candidate_name, state, pollster_rating_name, state, pct, created_at_date, display_name, start_date_raw, end_date_raw]
     value_format: "0.00\%"
   }
   measure: sanders_polling_pct {
