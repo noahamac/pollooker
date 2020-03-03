@@ -357,23 +357,24 @@ view: primary {
         WHEN ${state} = "New Hampshire" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/11/2020", '%m/%d/%y') )))
         WHEN ${state} = "South Carolina" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/29/2020", '%m/%d/%y') )))
         WHEN ${state} = "Nevada" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/22/2020", '%m/%d/%y') )))
+        WHEN ${state} IN ("Alabama", "Arkansas", "California", "Colorado", "Maine", "Massachusetts", "Minnesota", "North Carolina", "Oklahoma", "Tennessee", "Texas", "Utah", "Vermont", "Virginia") THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("03/03/2020", '%m/%d/%y') )))
         END ;;
     type: number
   }
-  measure: mse {
-    label: "Mean Standard Error"
-    sql: CASE
-        WHEN ${state} = "Iowa" AND ${campaign} = "Buttigieg" THEN 26.2 - ${polling_pct} / 26.2 * 100
-        WHEN ${state} = "Iowa" AND ${campaign} = "Sanders" THEN 26.2 - ${polling_pct} / 26.2 * 100
-        WHEN ${state} = "Iowa" AND ${campaign} = "Warren" THEN 18 - ${polling_pct} / 18 * 100
-        WHEN ${state} = "Iowa" AND ${campaign} = "Biden" THEN 6 - ${polling_pct} / 6 * 100
-        WHEN ${state} = "Iowa" AND ${campaign} = "Klobuchar" THEN 12.3 - ${polling_pct} / 12.3 * 100
-        WHEN ${state} = "Iowa" AND ${campaign} = "Steyer" THEN 0.3 - ${polling_pct} / 0.3 * 100
-        WHEN ${state} = "New Hampshire" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/11/2020", '%m/%d/%y') )))
-        WHEN ${state} = "Nevada" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/22/2020", '%m/%d/%y') )))
-        END ;;
-    type: number
-  }
+#   measure: mse {
+#     label: "Mean Standard Error"
+#     sql: CASE
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Buttigieg" THEN 26.2 - ${polling_pct} / 26.2 * 100
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Sanders" THEN 26.2 - ${polling_pct} / 26.2 * 100
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Warren" THEN 18 - ${polling_pct} / 18 * 100
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Biden" THEN 6 - ${polling_pct} / 6 * 100
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Klobuchar" THEN 12.3 - ${polling_pct} / 12.3 * 100
+#         WHEN ${state} = "Iowa" AND ${campaign} = "Steyer" THEN 0.3 - ${polling_pct} / 0.3 * 100
+#         WHEN ${state} = "New Hampshire" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/11/2020", '%m/%d/%y') )))
+#         WHEN ${state} = "Nevada" THEN DATEDIFF(${start_date_date}, (DATE(STR_TO_DATE("02/22/2020", '%m/%d/%y') )))
+#         END ;;
+#     type: number
+#   }
 
   #General avg measures
   measure: polling_pct {

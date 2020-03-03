@@ -71,14 +71,22 @@ explore: primary {
   }
 }
 
-explore: general {}
+explore: general {
+  join: general_copy {
+    sql_on: ${general.question_id} = ${general_copy.question_id} ;;
+    relationship: one_to_one
+    type: inner
+  }
+}
 
 explore: result_mse {
-#   join: primary {
-#     sql_on: ${result_mse.days_to_contest} = ${primary.days_to_contest} ;;
-#     relationship: one_to_one
-#   }
+  join: primary {
+    sql_on: ${result_mse.campaign} = ${primary.campaign} AND ${result_mse.state} = ${primary.state};;
+    relationship: one_to_one
+  }
 }
+
+explore: general_rollup {}
 
 explore: contributions {
   join: committees {

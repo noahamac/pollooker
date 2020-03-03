@@ -139,6 +139,7 @@ view: general {
   }
 
   dimension: question_id {
+    primary_key: yes
     type: number
     sql: ${TABLE}.question_id ;;
   }
@@ -560,5 +561,102 @@ view: general {
       value: "11"
     }
     value_format: "0.00\%"
+  }
+}
+
+# If necessary, uncomment the line below to include explore_source.
+# include: "pollooker.model.lkml"
+
+view: general_rollup {
+  derived_table: {
+    explore_source: general {
+      column: state {}
+      column: start_date_date {}
+      column: end_date_date {}
+      column: pollster {}
+      column: biden_polling_pct {}
+      column: buttigieg_polling_pct {}
+      column: bloomberg_polling_pct {}
+      column: klobuchar_polling_pct {}
+      column: sanders_polling_pct {}
+      column: warren_polling_pct {}
+      column: trump_polling_pct {}
+      column: question_id {}
+    }
+  }
+  dimension: state {}
+  dimension_group: start_date_date {
+    label: "Start Date"
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      month_num,
+      quarter,
+      year
+    ]
+  }
+  dimension_group: end_date_date {
+    label: "End Date"
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      month_num,
+      quarter,
+      year
+    ]
+  }
+  dimension: pollster {}
+  measure: biden_polling_pct {
+    label: "General Biden Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, biden_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  measure: buttigieg_polling_pct {
+    label: "General Buttigieg Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, buttigieg_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  measure: bloomberg_polling_pct {
+    label: "General Bloomberg Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, bloomberg_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  measure: klobuchar_polling_pct {
+    label: "General Klobuchar Polling Average"
+    value_format: "0.00\%"
+    drill_fields: [state, klobuchar_polling_pct, pollster, start_date_date_date, start_date_date_date]
+    type: average
+  }
+  measure: sanders_polling_pct {
+    label: "General Sanders Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, sanders_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  measure: warren_polling_pct {
+    label: "General Warren Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, warren_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  measure: trump_polling_pct {
+    label: "General Trump Polling Average"
+    value_format: "0.00\%"
+    type: average
+    drill_fields: [state, trump_polling_pct, pollster, start_date_date_date, start_date_date_date]
+  }
+  dimension: question_id {
+    type: number
   }
 }
