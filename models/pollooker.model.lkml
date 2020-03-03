@@ -86,7 +86,10 @@ explore: result_mse {
   }
 }
 
-explore: general_rollup {}
+explore: biden_matchup {}
+explore: buttigieg_matchup {}
+explore: sanders_matchup {}
+explore: warren_matchup {}
 
 explore: contributions {
   join: committees {
