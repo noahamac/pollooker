@@ -6,7 +6,7 @@
     name: Spider Sharp
     model: playground
     explore: sample_data
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [sample_data.rand_true, sample_data.state, sample_data.line_trend, sample_data.expon_trend,
       sample_data.sin_trending, sample_data.cos_wave, sample_data.pos_sin_wave, sample_data.num_thru_10,
       sample_data.count, sample_data.sin_wave, sample_data.sum_thru_10, sample_data.avg_thru_10]
@@ -49,7 +49,7 @@
     name: New Tile
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.ia_polling_pct, primary.nh_polling_pct, primary.campaign, primary.polling_pct,
       primary.ca_polling_pct, primary.sc_polling_pct]
     pivots: [primary.campaign]
@@ -99,7 +99,7 @@
     name: Independent Axes
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.ia_polling_pct, primary.nh_polling_pct, primary.campaign, primary.polling_pct,
       primary.ca_polling_pct, primary.sc_polling_pct]
     pivots: [primary.campaign]
@@ -148,7 +148,7 @@
     name: Spider Rounded (copy 2)
     model: playground
     explore: sample_data
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [sample_data.rand_true, sample_data.state, sample_data.line_trend, sample_data.expon_trend,
       sample_data.sin_wave]
     pivots: [sample_data.state]
@@ -197,7 +197,7 @@
     name: Untitled
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.ca_polling_pct, primary.ia_polling_pct, primary.nh_polling_pct,
       primary.polling_pct, primary.campaign, primary.sc_polling_pct]
     pivots: [primary.campaign]
@@ -239,7 +239,7 @@
     name: New Tile (copy)
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.ia_polling_pct, primary.nh_polling_pct, primary.campaign, primary.polling_pct,
       primary.ca_polling_pct, primary.sc_polling_pct]
     pivots: [primary.campaign]
@@ -288,7 +288,7 @@
     name: Growth using Spider!
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.start_date_month, primary.ca_polling_pct, primary.ia_polling_pct,
       primary.nh_polling_pct, primary.polling_pct, primary.sc_polling_pct, primary.ntl_polling_pct]
     pivots: [primary.start_date_month]
@@ -340,7 +340,7 @@
     name: New Tile (2)
     model: pollooker
     explore: primary
-    type: marketplace_git_github_com_looker_viz_spider_marketplace_git::spider-marketplace
+    type: marketplace_viz_spider::spider-marketplace
     fields: [primary.campaign, primary.ca_polling_pct, primary.ia_polling_pct, primary.ntl_polling_pct,
       primary.nh_polling_pct, primary.sc_polling_pct]
     filters:
