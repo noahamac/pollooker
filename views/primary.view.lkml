@@ -156,6 +156,10 @@ view: primary {
     description: "Link to full poll report, more information and cross tabs found here."
     type: string
     sql: ${TABLE}.url ;;
+    link: {
+      label: "Poll Report"
+      url: "{{ value }}"
+    }
   }
   dimension: tracking {
     type: string
