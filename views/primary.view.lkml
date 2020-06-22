@@ -386,6 +386,10 @@ view: primary {
     type: average
     sql: ${pct} ;;
     value_format: "0.00\%"
+    link: {
+      label: "Search this"
+      url: "https://www.google.com/search?q={{ value | url_encode }}"
+    }
     drill_fields: [candidate_name, state, pollster_rating_name, display_name, start_date_raw, end_date_raw]
   }
   measure: ntl_polling_pct {
